@@ -1,0 +1,165 @@
+/* Categories Section Styling */
+.categories-section {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.section-title {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: #007bff;
+    border-radius: 2px;
+}
+
+.category-cards-container {
+    display: grid;
+    /* يستخدم minmax لضمان أن الكروت تتكيف: أقل حجم 280px وأقصى 1fr (تأخذ المساحة المتاحة بالتساوي) */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.category-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block; /* مهم جدا لجعل الكارد بأكمله قابل للنقر */
+}
+
+.category-card {
+    position: relative;
+    /* بدلاً من ارتفاع ثابت، يمكن استخدام padding-bottom لتحديد نسبة العرض إلى الارتفاع */
+    /* هذا يجعل الكارد يحافظ على نسبة الصورة بغض النظر عن العرض */
+    /* نسبة 16:9 شائعة، يمكنك تجربة 75% لـ 4:3، أو 56.25% لـ 16:9 */
+    padding-bottom: 70%; /* 70% of its width - adjust this value based on your image aspect ratio */
+    height: 0; /* مهم جدا مع padding-bottom */
+    border-radius: 10px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; /* تأكد أن الصورة لا تتكرر */
+    display: flex;
+    align-items: flex-end; /* المحتوى يكون في الأسفل */
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 50%);
+    z-index: 1;
+    transition: background 0.3s ease;
+}
+
+.category-card:hover .card-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.1) 70%);
+}
+
+.card-content {
+    position: absolute; /* تغيير من relative إلى absolute */
+    bottom: 0; /* تأكد أن المحتوى يبدأ من الأسفل */
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    padding: 20px;
+    text-align: left;
+}
+
+.category-title {
+    font-size: 1.6em;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.category-subtitle {
+    font-size: 0.9em;
+    opacity: 0.8;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2em;
+    }
+
+    .category-cards-container {
+        /* قد تحتاج لتقليل الـ minmax هنا أيضاً إذا كانت الكروت كبيرة جداً على شاشات التابلت */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        
+    }
+
+    .category-card {
+        padding-bottom: 65%; /* قد تحتاج لضبط هذه النسبة أيضاً */
+    }
+
+    .card-content {
+        padding: 15px;
+    }
+
+    .category-title {
+        font-size: 1.4em;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 1.8em;
+        margin-bottom: 30px;
+    }
+
+    .category-cards-container {
+        /* على الشاشات الصغيرة جداً، كارد واحد في كل صف */
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .category-card {
+        /* على الموبايل، يمكن أن تكون الصورة أطول قليلاً للحفاظ على التفاصيل */
+        padding-bottom: 60%; /* يمكنك تجربة قيم مختلفة مثل 70% أو 80% */
+        /* أو يمكنك العودة لارتفاع ثابت إذا كنت تفضل ذلك */
+        /* height: 200px; */
+    }
+
+    .card-content {
+        padding: 15px;
+    }
+
+    .category-title {
+        font-size: 1.3em;
+    }
+
+    .category-subtitle {
+        font-size: 0.8em;
+    }
+}
+
+/* في حالة إذا كان لديك صور ذات أبعاد طولية جداً أو عرضية جداً */
+/* يمكنك استخدام object-fit: contain; أو object-fit: fill; ولكن هذا لا ينطبق مباشرة على background-image */
+/* إذا كانت الصور هي المشكلة الأساسية، فتأكد من أبعادها وجودتها */

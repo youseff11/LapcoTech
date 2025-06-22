@@ -1,0 +1,303 @@
+/* General container for product detail page */
+.product-detail-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    align-items: flex-start; /* Align items to the top */
+    direction: ltr; /* Ensure left-to-right text direction for specs */
+}
+
+/* Product Image Section */
+.product-image-section {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.product-image-section img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 5px;
+}
+
+/* Product Info Section */
+.product-info-section {
+    flex: 2;
+    min-width: 350px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* يدفع الزراير للأسفل إذا كان المحتوى أقصر */
+}
+
+.product-name {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+/* Style for the price section */
+.product-price-section {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.product-price-old {
+    font-size: 1.2em;
+    color: #999;
+    text-decoration: line-through;
+    white-space: nowrap;
+}
+
+.product-price-current {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+}
+
+.product-price-current.discount {
+    color: #1E90FF; /* Blue color for discounted price */
+}
+
+/* General Description */
+.product-general-description {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-left: 5px solid #1E90FF;
+    border-radius: 5px;
+}
+
+/* Product Specs Table Styles */
+.product-specs-table {
+    margin-top: 30px;
+    border-top: 1px solid #eee; /* Separator from description */
+    padding-top: 20px;
+    flex-grow: 1; /* للسماح للجدول بأخذ المساحة الرأسية المتاحة ودفع الزراير للأسفل */
+}
+
+.product-specs-table h2 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.product-specs-table h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: #1E90FF;
+    border-radius: 2px;
+}
+
+.product-specs-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.product-specs-table td {
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 1em;
+    color: #444;
+}
+
+.product-specs-table tr:last-child td {
+    border-bottom: none;
+}
+
+.product-specs-table td:first-child {
+    font-weight: bold;
+    color: #333;
+    width: 35%;
+    padding-left: 10px;
+}
+
+.product-specs-table td:last-child {
+    text-align: right;
+    padding-right: 10px;
+    color: #666;
+}
+
+/* Container for Buttons at the bottom of info section */
+.product-action-buttons {
+    display: flex;
+    gap: 15px; /* Space between buttons */
+    margin-top: auto; /* يدفع هذا الـ div إلى أسفل الحاوية المرنة الأب (.product-info-section) */
+    padding-top: 20px; /* إضافة بعض المسافة العلوية فوق الأزرار */
+    border-top: 1px solid #eee; /* اختياري: خط فوق الأزرار */
+    justify-content: flex-start; /* محاذاة الأزرار إلى اليسار داخل هذه الحاوية */
+}
+
+/* Buttons */
+.btn-add-to-cart {
+    background-color: #28a745; /* Green */
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    box-sizing: border-box;
+    /* Removed fixed width from here, will be handled by flex properties below */
+}
+.btn-add-to-cart{
+    margin-bottom: 1rem;
+}
+.btn-add-to-cart:hover {
+    background-color: #218838;
+}
+
+.btn-add-to-cart.out-of-stock {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+.btn-add-to-cart.out-of-stock:hover {
+    background-color: #bbb;
+}
+
+.btn-back-to-shop {
+    background-color: #007bff; /* Blue */
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    box-sizing: border-box;
+    /* Removed fixed width from here, will be handled by flex properties below */
+}
+
+.btn-back-to-shop:hover {
+    background-color: #0056b3;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 991px) { /* Adjusted for smaller screens */
+    .product-detail-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        gap: 30px;
+    }
+
+    .product-image-section { /* Image section itself can take full width */
+        min-width: unset;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .product-info-section {
+        min-width: unset;
+        width: 100%;
+        padding-left: 0; /* No left padding when stacked */
+        justify-content: flex-start; /* Reset justify-content for column layout to default behavior */
+    }
+
+    .product-name {
+        font-size: 2em;
+        text-align: center;
+    }
+
+    .product-price-section {
+        justify-content: center;
+    }
+
+    .product-specs-table {
+        margin-top: 20px;
+    }
+
+    .product-specs-table h2 {
+        text-align: center;
+    }
+
+    .product-specs-table h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .product-specs-table td:first-child {
+        width: 40%;
+        padding-left: 5px;
+    }
+
+    .product-specs-table td:last-child {
+        padding-right: 5px;
+    }
+
+    /* Buttons will stack by default in .product-action-buttons */
+    .product-action-buttons {
+        flex-direction: column; /* Stack buttons vertically */
+        justify-content: center; /* Center buttons when stacked */
+        align-items: center; /* Center items horizontally when stacked */
+        width: 100%; /* Take full width of parent */
+    }
+    .btn-add-to-cart,
+    .btn-back-to-shop {
+        width: 100%; /* Take full width of their container when stacked */
+    }
+}
+
+@media (max-width: 778px) {
+    .product-detail-container {
+        margin: 30px auto;
+        padding: 15px;
+    }
+    .product-name {
+        font-size: 1.8em;
+    }
+    .product-price-current {
+        font-size: 1.5em;
+    }
+    .product-price-old {
+        font-size: 1em;
+    }
+    .product-general-description {
+        font-size: 1em;
+    }
+    .product-specs-table h2 {
+        font-size: 1.5em;
+    }
+    .product-specs-table td {
+        font-size: 0.9em;
+        padding: 10px 0;
+    }
+    .product-detail-container .btns {
+        display: none;
+    }
+}

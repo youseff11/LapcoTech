@@ -1,0 +1,184 @@
+{% load static %}
+{% include "parts/nav.html" %}
+
+{% block content %}
+    <main>
+    <link rel="stylesheet" href="{% static 'css/shop/shopp.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+        {# Filter and Search Navbar #}
+        <div class="filter-search-navbar">
+            <div class="filter-search-content">
+                <div class="filter-search-filters">
+                    {# Category Filter Dropdown #}
+                    <div class="filter-group">
+                        <button class="filter-dropbtn" id="categoryDropBtn">Categories ▼</button>
+                        <div class="filter-dropdown-content" id="categoryDropdownContent">
+                            <a href="{% url 'shop:product_list' %}" class="filter-item {% if not selected_category %}active{% endif %}">All</a>
+                            {% for cat in categories %}
+                                <a href="{% url 'shop:product_list_by_category' cat.slug %}" class="filter-item {% if selected_category and selected_category.slug == cat.slug %}active{% endif %}">{{ cat.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    {# Brand Filter Dropdown #}
+                    <div class="filter-group">
+                        <button class="filter-dropbtn" id="brandDropBtn">Brands ▼</button>
+                        <div class="filter-dropdown-content" id="brandDropdownContent">
+                            <a href="{% url 'shop:product_list' %}" class="filter-item {% if not selected_brand %}active{% endif %}">All</a>
+                            {% for bnd in brands %}
+                                <a href="{% url 'shop:product_list_by_brand' bnd.slug %}" class="filter-item {% if selected_brand and selected_brand.slug == bnd.slug %}active{% endif %}">{{ bnd.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                {# Search Bar #}
+                <div class="search-bar">
+                    <form action="" method="get">
+                        <input type="text" name="q" placeholder="Search products..." value="{{ request.GET.q|default:'' }}">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {# End New: Filter and Search Navbar #}
+
+
+        <div class="shop-container">
+            <h1 class="shop-title">{{ page_title }}</h1>
+            <p class="shop-intro">Explore our curated selection of high-performance and reliable laptops.</p>
+
+            <div class="product-grid">
+                {% if products %}
+                    {% for product in products %}
+                        <a href="{% url 'shop:product_detail' product.id %}" class="product-card">
+                            <div class="product-image-wrapper">
+                                {% if product.image %}
+                                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                                {% else %}
+                                    <img src="{% static 'images/placeholder.jpg' %}" alt="No Image" class="product-image">
+                                {% endif %}
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-name">{{ product.name }}</h3>
+                                {# استخدام الوصف المنسق من الدالة وتحديد عدد الأسطر للقص بواسطة JavaScript #}
+                                <p class="product-description" data-max-lines="3">{{ product.get_product_specs_description }}</p> {# تم إزالة |truncatechars:100 هنا #}
+
+                                {# عرض الفئات (إذا كنت لا تزال تريدها تحت الوصف) #}
+                                {% if product.category.all %}
+                                    <p class="product-categories">
+                                        {% for cat in product.category.all %}
+                                            <span class="product-category-item">{{ cat.name }}</span>
+                                        {% endfor %}
+                                    </p>
+                                {% endif %}
+
+                                {# قسم السعر الجديد مع السعر القديم المشطوب #}
+                                <div class="product-price-section">
+                                    {% if product.old_price %}
+                                        <span class="product-price-old">{{ product.old_price|floatformat:0 }} EGP</span>
+                                        <span class="product-price-current discount">{{ product.price|floatformat:0 }} EGP</span>
+                                    {% else %}
+                                        <span class="product-price-current">{{ product.price|floatformat:0 }} EGP</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <p class="no-products">No laptops available at the moment. Please check back later!</p>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to toggle dropdown content
+            function toggleDropdown(buttonId, contentId) {
+                const button = document.getElementById(buttonId);
+                const content = document.getElementById(contentId);
+
+                if (button && content) {
+                    button.addEventListener('click', function() {
+                        // Close other open dropdowns first (if any)
+                        document.querySelectorAll('.filter-dropdown-content').forEach(otherContent => {
+                            if (otherContent.id !== contentId && otherContent.classList.contains('show')) {
+                                otherContent.classList.remove('show');
+                            }
+                        });
+                        content.classList.toggle('show');
+                    });
+                }
+            }
+
+            // Apply toggle function to category and brand dropdowns
+            toggleDropdown('categoryDropBtn', 'categoryDropdownContent');
+            toggleDropdown('brandDropBtn', 'brandDropdownContent');
+
+            // Close the dropdown if the user clicks outside of it
+            window.addEventListener('click', function(event) {
+                if (!event.target.matches('.filter-dropbtn') && !event.target.closest('.filter-group')) {
+                    document.querySelectorAll('.filter-dropdown-content').forEach(content => {
+                        if (content.classList.contains('show')) {
+                            content.classList.remove('show');
+                        }
+                    });
+                }
+            });
+
+            // --- إضافة كود قص النص بواسطة JavaScript هنا ---
+            const descriptions = document.querySelectorAll('.product-description[data-max-lines]');
+
+            descriptions.forEach(description => {
+                const maxLines = parseInt(description.dataset.maxLines);
+                const lineHeight = parseFloat(getComputedStyle(description).lineHeight); // تأكد أن line-height في CSS مضبوطة بشكل صحيح (مثلاً: 1.5em أو 24px)
+                const maxHeight = lineHeight * maxLines;
+
+                // إعادة تهيئة لتجنب مشاكل القياس إذا كان العنصر يحتوي على قص مسبق
+                description.style.maxHeight = 'none';
+                description.style.overflow = 'visible';
+                description.style.textOverflow = 'clip';
+                description.style.whiteSpace = 'normal'; // التأكد من التفاف النص
+
+                if (description.scrollHeight > maxHeight) {
+                    const originalText = description.textContent;
+                    let truncatedText = originalText;
+                    let lastEllipsisIndex = -1;
+
+                    // تقليل النص تدريجياً حتى يتناسب مع الارتفاع الأقصى
+                    while (description.scrollHeight > maxHeight && truncatedText.length > 0) {
+                        // قلل النص ببطء لإيجاد النقطة الصحيحة
+                        truncatedText = truncatedText.substring(0, truncatedText.length - 1);
+                        description.textContent = truncatedText + '...';
+
+                        // لتجنب حلقة لا نهائية في حالات نادرة جداً
+                        if (truncatedText.length === lastEllipsisIndex) {
+                            break;
+                        }
+                        lastEllipsisIndex = truncatedText.length;
+                    }
+                    
+                    // إذا كان النص لا يزال أطول من اللازم بعد المحاولة الأولية
+                    // (قد يحدث إذا كانت الأسطر الأخيرة قصيرة جداً)
+                    while (description.scrollHeight > maxHeight && truncatedText.length > 0) {
+                        truncatedText = truncatedText.substring(0, truncatedText.length - 10); // تقليل أكبر
+                        description.textContent = truncatedText + '...';
+                    }
+
+                    // تطبيق خصائص القص النهائية
+                    description.style.maxHeight = maxHeight + 'px';
+                    description.style.overflow = 'hidden';
+                    description.style.textOverflow = 'ellipsis';
+                    description.style.whiteSpace = 'normal';
+                }
+            });
+            // --- نهاية كود قص النص بواسطة JavaScript ---
+
+        });
+    </script>
+{% endblock content %}
+
+{% include "parts/footer.html" %}

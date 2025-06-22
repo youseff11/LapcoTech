@@ -1,0 +1,430 @@
+/* static/css/cart/cart_detail.css - Refactored for a cleaner, modern look (Smaller Version) */
+
+.cart-main-content {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.cart-main-content h1 {
+    text-align: center;
+    color: #19422f;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.cart-items-container {
+    border-top: 1px solid #e5e5e5;
+    padding-top: 20px;
+    margin-bottom: 30px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #e5e5e5;
+    gap: 20px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item:hover {
+    background-color: #fcfcfc;
+}
+
+.item-image {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.item-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.item-details h3 {
+    margin: 0 0 6px;
+    color: #333333;
+    font-size: 1.4em;
+    font-weight: 600;
+}
+
+.item-details p {
+    margin: 3px 0;
+    color: #666666;
+    font-size: 1em;
+}
+
+.item-details .item-price,
+.item-details .item-total-price {
+    font-weight: 500;
+    color: #19422f;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 10px 0;
+}
+
+.quantity-controls button {
+    background-color: #19422f;
+    color: #fff;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    min-width: 35px;
+    text-align: center;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.quantity-controls button:hover {
+    background-color: #2e6b4b;
+    transform: translateY(-1px);
+}
+
+.quantity-controls button:active {
+    transform: translateY(0);
+}
+
+.item-quantity {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: #333333;
+    min-width: 35px;
+    text-align: center;
+}
+
+.remove-item-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 500;
+    margin-top: 12px;
+    transition: background-color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: fit-content;
+}
+
+.remove-item-btn:hover {
+    background-color: #c82333;
+}
+
+/* Updated Cart Summary Section */
+.cart-summary {
+    background-color: #f8f9fa;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    margin-top: 25px;
+    display: flex; /* Use flexbox for better alignment */
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-end; /* Align content to the right (as per original) */
+    gap: 10px; /* Spacing between summary lines */
+}
+
+.cart-summary h2 {
+    margin-top: 0;
+    color: #19422f;
+    font-size: 1.8em;
+    margin-bottom: 8px; /* Reduced bottom margin to work with gap */
+    font-weight: 600;
+    width: 100%; /* Ensure heading takes full width for text-align */
+    text-align: right; /* Keep heading aligned right */
+}
+
+.cart-summary p {
+    font-size: 1.1em;
+    margin: 0; /* Reset margin to rely on gap */
+    color: #555555;
+    width: 100%; /* Ensure paragraphs take full width for text-align */
+    display: flex; /* Make price/label line a flex container */
+    justify-content: space-between; /* Distribute label and value */
+    align-items: baseline;
+}
+
+.cart-summary p strong {
+    color: #19422f; /* Make labels slightly darker if desired */
+    font-weight: 600;
+}
+
+.cart-summary .total-price {
+    font-size: 1.7em;
+    font-weight: bold;
+    color: #0d6efd;
+    margin-top: 10px; /* Add some top margin to separate from other summary lines */
+    margin-bottom: 0; /* Reset margin to rely on flex container for spacing */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 10px; /* Add padding to visually separate total */
+    border-top: 1px dashed #cccccc; /* Add a subtle dashed line above total */
+}
+
+.cart-summary .total-price span:first-child {
+    color: #333333; /* Color for the "Grand Total" label */
+    font-weight: 600;
+    font-size: 0.8em; /* Slightly smaller font for label within total */
+}
+
+
+.btn-checkout {
+    background-color: #0d6efd;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 1.3em;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    box-shadow: 0 3px 10px rgba(13, 110, 253, 0.15);
+    margin-top: 20px; /* Add margin to separate from summary lines */
+    width: 100%; /* Make button full width in summary */
+    text-align: center;
+}
+
+.btn-checkout:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-2px);
+}
+
+.btn-checkout:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(13, 110, 253, 0.3);
+}
+
+.empty-cart-message {
+    text-align: center;
+    font-size: 1.2em;
+    color: #777;
+    padding: 60px 0;
+    background-color: #fdfdfd;
+    border-radius: 8px;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.02);
+}
+
+.empty-cart-message a {
+    color: #0d6efd;
+    text-decoration: none;
+    font-weight: bold;
+    transition: text-decoration 0.2s ease;
+}
+
+.empty-cart-message a:hover {
+    text-decoration: underline;
+}
+
+.btn-continue-shopping {
+    display: block;
+    width: fit-content;
+    margin: 30px auto 15px;
+    padding: 12px 25px;
+    background-color: #6c757d;
+    color: white;
+    text-decoration: none;
+    border-radius: 7px;
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+}
+
+.btn-continue-shopping:hover {
+    background-color: #5a6268;
+    transform: translateY(-1px);
+}
+
+.btn-continue-shopping:active {
+    transform: translateY(0);
+}
+
+/* Media Queries for smaller screens (further adjusted) */
+@media (max-width: 768px) {
+    .cart-main-content {
+        margin: 15px;
+        padding: 18px;
+    }
+
+    .cart-main-content h1 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    .cart-item {
+        padding: 18px 0;
+        gap: 12px;
+    }
+
+    .item-image {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 8px;
+    }
+
+    .item-details h3 {
+        font-size: 1.3em;
+    }
+
+    .item-details p {
+        font-size: 0.95em;
+    }
+
+    .quantity-controls {
+        margin: 8px 0;
+    }
+
+    .quantity-controls button {
+        padding: 6px 10px;
+        font-size: 0.9em;
+        min-width: 32px;
+    }
+
+    .item-quantity {
+        font-size: 1em;
+        min-width: 32px;
+    }
+
+    .remove-item-btn {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+
+    .cart-summary {
+        padding: 18px;
+        gap: 8px; /* Adjust gap for smaller screens */
+    }
+
+    .cart-summary h2 {
+        font-size: 1.6em;
+        margin-bottom: 5px; /* Adjust margin for smaller screens */
+    }
+
+    .cart-summary p {
+        font-size: 1em;
+    }
+
+    .cart-summary .total-price {
+        font-size: 1.5em;
+        margin-top: 8px; /* Adjust margin for smaller screens */
+        padding-top: 8px;
+    }
+
+    .btn-checkout {
+        padding: 13px 22px;
+        font-size: 1.2em;
+        margin-top: 15px; /* Adjust margin for smaller screens */
+    }
+
+    .empty-cart-message {
+        padding: 40px 8px;
+        font-size: 1.1em;
+    }
+
+    .btn-continue-shopping {
+        margin: 25px auto 8px;
+        padding: 10px 20px;
+        font-size: 0.95em;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart-main-content {
+        padding: 12px;
+        margin: 10px;
+    }
+
+    .cart-main-content h1 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+
+    .item-image {
+        width: 70px;
+        height: 70px;
+    }
+
+    .item-details h3 {
+        font-size: 1.1em;
+    }
+
+    .item-details p,
+    .quantity-controls button,
+    .item-quantity {
+        font-size: 0.85em;
+    }
+
+    .remove-item-btn {
+        padding: 7px 12px;
+        font-size: 0.8em;
+    }
+
+    .cart-summary {
+        padding: 12px;
+        gap: 6px;
+    }
+
+    .cart-summary h2 {
+        font-size: 1.3em;
+    }
+
+    .cart-summary p {
+        font-size: 0.9em;
+    }
+
+    .cart-summary .total-price {
+        font-size: 1.3em;
+        margin-top: 6px;
+        padding-top: 6px;
+    }
+
+    .btn-checkout {
+        font-size: 1em;
+        padding: 10px 18px;
+        margin-top: 12px;
+    }
+
+    .empty-cart-message {
+        font-size: 1em;
+        padding: 30px 5px;
+    }
+}

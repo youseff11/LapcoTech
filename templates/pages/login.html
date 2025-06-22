@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    {% load static %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/pages/login.css' %}">
+
+    <style>
+        /* These media queries can be moved to login.css if not already there */
+        @media (max-width: 991px) {
+           .login_form_container {
+             width: 90%;
+           }
+           .footer { /* Corrected from .fotter to .footer to match button class */
+             width: 90%;
+           }
+        }
+        /* The .errorlist and .input_group label styles are now handled in login.css */
+    </style>
+</head>
+<body>
+    <div class="login_form_container">
+        <div class="login_form">
+            <h2>Login</h2>
+
+            {# Django Messages (Success, Error, Info from views) #}
+            {% if messages %}
+                <ul class="messages" style="list-style-type: none; padding: 0; margin-bottom: 10px;">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}
+                            style="padding: 10px; margin-bottom: 5px; border-radius: 5px;
+                                        {% if 'success' in message.tags %}background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;{% endif %}
+                                        {% if 'error' in message.tags %}background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;{% endif %}
+                                        {% if 'info' in message.tags %}background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb;{% endif %}
+                                        ">
+                            {{ message }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+
+                {# Consolidated Form Errors at the Top #}
+                {% if form.errors %}
+                    <ul class="errorlist top-level-errorlist"> {# Using the same class as signup for consistent styling #}
+                        {% for field, errors in form.errors.items %}
+                            {% if field == '__all__' %}
+                                {# Handle non-field errors (e.g., "Invalid credentials") #}
+                                {% for error in errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            {% else %}
+                                {# Handle field-specific errors (e.g., "This field is required") #}
+                                {% for error in errors %}
+                                    <li><strong>{{ field|capfirst }}:</strong> {{ error }}</li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {# Username Field #}
+                <div class="input_group">
+                    <i class="fa fa-user"></i>
+                    <input
+                        type="text"
+                        name="{{ form.username.name }}"
+                        placeholder="Username"
+                        class="input_text"
+                        autocomplete="off"
+                        required
+                        value="{{ form.username.value|default:'' }}"
+                    />
+                </div>
+
+                {# Password Field #}
+                <div class="input_group">
+                    <i class="fa fa-lock"></i> {# Changed to fa-lock for consistency #}
+                    <input
+                        type="password"
+                        name="{{ form.password.name }}"
+                        placeholder="Password"
+                        class="input_text"
+                        autocomplete="off"
+                        required
+                    />
+                </div>
+
+                <button type="submit" class="footer">Login</button>
+            </form>
+
+            <div class="footer-txt">
+                <p>Forgot Password?</p>
+                <a href="{% url 'signup' %}">Sign Up</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

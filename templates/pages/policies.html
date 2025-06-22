@@ -1,0 +1,108 @@
+{% load static %}
+{% include "parts/nav.html" %}
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr"> {# Changed to English language and left-to-right direction #}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ByBeyond - Our Policies</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="{% static 'css/pages/policies.css' %}">
+    
+    <style>
+        /* General body styles, consider moving these to your base.css or main.css */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8; /* Light background color */
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <main class="policies-container">
+        <h1 class="policies-title">Our Policies</h1>
+        <p class="policies-intro">
+            At ByBeyond, we are committed to providing an excellent shopping experience for our customers.
+            Our policies include information on shipping, returns, privacy, and more.
+            Please read these policies carefully to understand your rights and responsibilities as a customer.
+        </p>
+
+        <section class="policy-section">
+            <h2 class="section-title">1. Shipping and Delivery Policy</h2>
+            <div class="policy-content">
+                <p>
+                    We strive to process and ship all orders as quickly as possible.
+                    Shipping times vary based on the delivery destination and the selected shipping method.
+                    You will be provided with a tracking number for your order once it has been shipped to monitor its status.
+                </p>
+                <ul>
+                    <li><strong>Processing Time:</strong> 1-2 business days.</li>
+                    <li><strong>Estimated Delivery Times:</strong> 3-7 business days (domestic), 7-14 business days (international).</li>
+                    <li><strong>Shipping Costs:</strong> Vary by weight and destination, displayed at checkout.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="policy-section">
+            <h2 class="section-title">2. Return and Exchange Policy</h2>
+            <div class="policy-content">
+                <p>
+                    Your satisfaction is our priority. If you are not satisfied with your purchase for any reason,
+                    you can return the product within 14 days from the date of receipt, provided the product is in its
+                    original condition, unused, and with the original invoice.
+                </p>
+                <ul>
+                    <li>Products must be unused and in their original packaging.</li>
+                    <li>Opened or used products cannot be returned, except in case of a manufacturing defect.</li>
+                    <li>The customer bears the shipping costs for returns, unless the product is defective.</li>
+                    <li>Refunds will be processed within 7 business days after receiving and inspecting the returned product.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="policy-section">
+            <h2 class="section-title">3. Privacy Policy</h2>
+            <div class="policy-content">
+                <p>
+                    We are committed to protecting the privacy of your personal data. Information is collected
+                    solely for the purpose of enhancing your shopping experience and processing your orders.
+                    We will not share your personal information with any third party without your explicit consent.
+                </p>
+                <ul>
+                    <li><strong>Information We Collect:</strong> Name, address, email, phone number.</li>
+                    <li><strong>How We Use Your Information:</strong> To process orders, improve service, and send promotional offers (with your consent).</li>
+                    <li><strong>Security:</strong> We use encryption technologies to protect your sensitive data.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="policy-section">
+            <h2 class="section-title">4. Terms and Conditions of Use</h2>
+            <div class="policy-content">
+                <p>
+                    By using our website, you agree to abide by the terms and conditions
+                    listed below. These terms govern your use of the site and provide
+                    information about your rights and responsibilities.
+                </p>
+                <ul>
+                    <li>All content on this website is protected by copyright.</li>
+                    <li>The website is available for personal, non-commercial use only.</li>
+                    <li>We reserve the right to modify these terms at any time.</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
+
+{% block content %}{% endblock content %}
+
+{% include "parts/footer.html" %}

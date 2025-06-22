@@ -1,0 +1,293 @@
+/* General container for the cart summary page */
+.cart-summary-container {
+    max-width: 900px;
+    margin: 80px auto 40px auto; /* Adjust top margin to account for fixed navbar */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cart-summary-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    font-weight: 600;
+}
+
+/* Wrapper for individual cart items */
+.cart-items-wrapper {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+/* Styling for each individual cart item */
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+    gap: 15px; /* Space between flex items */
+}
+
+.cart-item:last-child {
+    border-bottom: none; /* No border for the last item */
+}
+
+/* Product image in cart */
+.item-image {
+    flex-shrink: 0; /* Prevent image from shrinking */
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #e0e0e0; /* Placeholder background */
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the area, cropping if necessary */
+    display: block;
+}
+
+/* Product details (name, price, quantity controls) */
+.item-details {
+    flex-grow: 1; /* Allows details section to take available space */
+    padding-right: 15px;
+}
+
+.item-details .item-name {
+    font-size: 1.3em;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+.item-details .item-price {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* Quantity controls for each item */
+.item-quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantity-btn {
+    background-color: #007bff; /* A nice blue for buttons */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+    min-width: 30px; /* Ensure button size */
+    text-align: center;
+}
+
+.quantity-btn:hover {
+    background-color: #0056b3;
+}
+
+.item-qty-input {
+    width: 50px;
+    padding: 5px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 1em;
+    -moz-appearance: textfield; /* Hide arrows for Firefox */
+}
+
+/* Hide arrows for Chrome, Safari, Edge */
+.item-qty-input::-webkit-outer-spin-button,
+.item-qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+/* Item total and remove button */
+.item-total {
+    flex-shrink: 0; /* Prevent from shrinking */
+    text-align: right;
+}
+
+.item-total p {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.item-subtotal {
+    color: #28a745; /* Green for subtotal */
+}
+
+.remove-item-btn {
+    background-color: #dc3545; /* Red for remove button */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.remove-item-btn:hover {
+    background-color: #c82333;
+}
+
+/* Cart summary footer (total and action buttons) */
+.cart-summary-footer {
+    border-top: 2px solid #eee;
+    padding-top: 20px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 20px;
+}
+
+.total-price {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #333;
+}
+
+#cartGrandTotal {
+    color: #28a745; /* Green for grand total */
+}
+
+.cart-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none; /* For anchor tags styled as buttons */
+    text-align: center;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.continue-shopping-btn {
+    background-color: #6c757d; /* Grey for continue shopping */
+    color: white;
+}
+
+.continue-shopping-btn:hover {
+    background-color: #5a6268;
+}
+
+.checkout-btn {
+    background-color: #28a745; /* Green for checkout */
+    color: white;
+}
+
+.checkout-btn:hover {
+    background-color: #218838;
+}
+
+/* Empty cart message */
+.empty-cart-message {
+    text-align: center;
+    font-size: 1.4em;
+    color: #777;
+    padding: 50px 0;
+}
+
+.empty-cart-message a {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+.empty-cart-message a:hover {
+    color: #0056b3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .cart-summary-container {
+        margin-top: 60px; /* Adjust for smaller screens */
+        padding: 15px;
+    }
+
+    .cart-item {
+        flex-direction: column; /* Stack items vertically */
+        align-items: flex-start; /* Align items to the start */
+        gap: 10px;
+        padding: 15px 0;
+    }
+
+    .item-image {
+        width: 80px;
+        height: 80px;
+    }
+
+    .item-details {
+        width: 100%; /* Take full width when stacked */
+        padding-right: 0;
+    }
+
+    .item-name {
+        font-size: 1.2em;
+    }
+
+    .item-price {
+        font-size: 1em;
+    }
+
+    .item-total {
+        width: 100%;
+        text-align: left; /* Align total to left when stacked */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .remove-item-btn {
+        margin-top: 10px;
+        font-size: 0.85em;
+    }
+
+    .cart-summary-footer {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .total-price {
+        font-size: 1.5em;
+    }
+
+    .cart-actions {
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn {
+        width: 100%; /* Full width buttons on mobile */
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+}

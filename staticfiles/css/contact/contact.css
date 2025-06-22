@@ -1,0 +1,226 @@
+
+.contact-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    direction: ltr; 
+    text-align: left; 
+}
+
+.contact-title {
+    font-size: 3em;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.contact-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: #1E90FF; /* Branding color: DodgerBlue */
+    border-radius: 2px;
+}
+
+.contact-intro {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Info on left, Form on right */
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.contact-info-section,
+.contact-form-section {
+    padding: 25px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.contact-info-section h2,
+.contact-form-section h2 {
+    font-size: 2em;
+    color: #34495e;
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 1.05em;
+    color: #555;
+}
+
+.info-item i {
+    font-size: 1.3em;
+    color: #1E90FF; /* Branding color for icons: DodgerBlue */
+    margin-right: 15px; /* Space between icon and text */
+    min-width: 25px; /* Ensures icons align visually */
+    text-align: center;
+}
+
+.info-item p {
+    margin: 0;
+}
+
+.contact-info-section h3 {
+    font-size: 1.5em;
+    color: #34495e;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-icons a {
+    color: #555;
+    font-size: 1.8em;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #1E90FF; /* Branding color on hover: DodgerBlue */
+}
+
+/* Contact Form Styles */
+.contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form label {
+    display: block;
+    font-size: 1em;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus {
+    border-color: #1E90FF; /* Highlight on focus: DodgerBlue */
+    outline: none;
+    box-shadow: 0 0 5px rgba(30, 144, 255, 0.3); /* Adjust rgba for DodgerBlue */
+}
+
+.contact-form textarea {
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.btn-submit {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #1E90FF; /* Branding color for button: DodgerBlue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-submit:hover {
+    background-color: #4169E1; /* Darker shade on hover: RoyalBlue */
+    transform: translateY(-2px);
+}
+
+/* Map Section */
+.map-section {
+    margin-top: 50px;
+    padding: 25px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.map-section h2 {
+    font-size: 2em;
+    color: #34495e;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.map-placeholder {
+    width: 100%;
+    height: 400px; /* Fixed height for the map */
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #777;
+    font-size: 1.2em;
+    border-radius: 8px;
+    overflow: hidden; /* Ensure iframe fits within border-radius */
+}
+
+.map-placeholder iframe {
+    border-radius: 8px; /* Apply border-radius to iframe as well */
+}
+
+.map-note {
+    font-size: 0.9em;
+    color: #888;
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .contact-container {
+        margin: 30px auto;
+        padding: 20px;
+        max-width: 95%;
+    }
+    .contact-grid {
+        grid-template-columns: 1fr; /* Stack columns on small screens */
+        gap: 30px;
+    }
+    .contact-title {
+        font-size: 2.5em;
+    }
+    .contact-info-section h2,
+    .contact-form-section h2,
+    .map-section h2 {
+        font-size: 1.8em;
+    }
+}

@@ -1,0 +1,266 @@
+{% load static %}
+{% include "parts/nav.html" %}
+
+{% block content %}
+<div class="overlay" id="overlay"></div>
+
+    <style>
+        /* Global Styles for body, if not already in base.html */
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif; /* A modern, clean font */
+            background-color: #f5f7fa; /* Light background */
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Main Container for the page content */
+        .order-confirmation-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 120px); /* Adjust based on your header/footer height */
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Order Confirmation Card */
+        .confirmation-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 800px; /* Increased max-width for more content */
+            text-align: center;
+            box-sizing: border-box;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Icon for success */
+        .success-icon {
+            color: #28a745; /* Green color */
+            font-size: 60px; /* Larger icon */
+            margin-bottom: 25px;
+            /* Using inline SVG for a crisp look, could also be Font Awesome if loaded */
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .confirmation-card h1 {
+            font-size: 2.8em;
+            color: #1a202c; /* Darker heading */
+            margin-bottom: 15px;
+            font-weight: 800; /* Extra bold */
+            letter-spacing: -0.8px;
+        }
+
+        .confirmation-card p {
+            font-size: 1.15em;
+            color: #4a5568; /* Slightly darker text */
+            margin-bottom: 25px;
+        }
+
+        /* Details Section */
+        .order-details-summary {
+            background-color: #f9fafb; /* Lighter background for details */
+            border-radius: 8px;
+            padding: 25px;
+            margin: 35px auto;
+            border: 1px solid #edf2f7;
+            text-align: left; /* Align text to left for details */
+        }
+
+        .order-details-summary h2 {
+            font-size: 1.6em;
+            color: #2d3748; /* Medium dark heading */
+            margin-bottom: 20px;
+            border-bottom: 2px solid #a0aec0; /* Underline effect */
+            padding-bottom: 10px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .order-details-summary ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .order-details-summary ul li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #ebf4ff; /* Light dashed line */
+            font-size: 1.05em;
+            color: #4a5568;
+        }
+
+        .order-details-summary ul li:last-child {
+            border-bottom: none;
+            font-weight: 600; /* Bold total price */
+            color: #1a202c;
+            font-size: 1.2em; /* Larger total price */
+        }
+
+        .order-details-summary ul li strong {
+            color: #2d3748;
+            font-weight: 700;
+        }
+
+        /* Button Group */
+        .action-buttons {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Space between buttons */
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+        }
+
+        .action-buttons .btn {
+            display: inline-block;
+            padding: 14px 30px; /* Generous padding */
+            font-size: 1.05em;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 30px; /* More rounded */
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary-custom {
+            background-color: #4CAF50; /* Primary success green */
+            color: white;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-secondary-custom {
+            background-color: #007BFF; /* Secondary blue */
+            color: white;
+        }
+
+        .btn-secondary-custom:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .confirmation-card {
+                padding: 30px 20px;
+            }
+
+            .confirmation-card h1 {
+                font-size: 2.2em;
+            }
+
+            .order-details-summary {
+                padding: 15px;
+            }
+
+            .order-details-summary h2 {
+                font-size: 1.4em;
+            }
+
+            .order-details-summary ul li {
+                flex-direction: column; /* Stack details vertically */
+                align-items: flex-start;
+                padding: 8px 0;
+            }
+
+            .order-details-summary ul li span:last-child {
+                margin-top: 5px;
+            }
+
+            .action-buttons {
+                flex-direction: column; /* Stack buttons vertically */
+                gap: 15px;
+            }
+
+            .action-buttons .btn {
+                width: 90%; /* Make buttons full width */
+                max-width: 300px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+
+<div class="order-confirmation-wrapper">
+    <div class="confirmation-card">
+        <div class="success-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="60px" height="60px">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+        </div>
+        <h1>Order Confirmed!</h1>
+        <p>Thank you for your purchase. Your order has been successfully placed.</p>
+        
+        <div class="order-details-summary">
+            <h2>Order Summary</h2>
+            <ul>
+                <li>
+                    <strong>Order ID:</strong>
+                    <span>#{{ order.id }}</span>
+                </li>
+                <li>
+                    <strong>Order Date:</strong>
+                    <span>{{ order.created_at|date:"F d, Y, h:i A" }}</span> 
+                </li>
+                <li>
+                    <strong>Total Amount:</strong>
+                    <span>{{ order.total_price|floatformat:0 }} EGP</span> 
+                </li>
+                <li>
+                    <strong>Payment Status:</strong>
+                    <span>{{ order.status }}</span> 
+                </li>
+                 {% if order.user %}
+                <li>
+                    <strong>Customer:</strong>
+                    <span>{{ order.user.username }}</span>
+                </li>
+                {% else %}
+                <li>
+                    <strong>Customer:</strong>
+                    <span>Guest</span>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <h3>Ordered Items:</h3>
+        {% if order_items %}
+            <ul class="order-items-list">
+                {% for item in order_items %}
+                    <li>
+                        <span>{{ item.product.name }} ({{ item.quantity }} x {{ item.price|floatformat:0 }} EGP)</span>
+                        <span>{{ item.total_price|floatformat:0 }} EGP</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No items found for this order.</p>
+        {% endif %}
+
+        <div class="action-buttons">
+            <a href="{% url 'shop:product_list' %}" class="btn btn-primary-custom">Continue Shopping</a>
+            {% if order and request.user.is_authenticated %} 
+                <a href="{% url 'myaccount:account' %}" class="btn btn-secondary-custom">View My Orders</a>
+            {% endif %}
+        </div>
+        <p style="margin-top: 30px; font-size: 0.9em; color: #718096;">You will also receive a confirmation email shortly.</p>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% include "parts/footer.html" %}

@@ -1,0 +1,318 @@
+/* General container for product detail page */
+.product-detail-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    align-items: flex-start; /* Align items to the top */
+    direction: ltr; /* Ensure left-to-right text direction for specs */
+}
+
+/* NEW: Wrapper for Image and Buttons */
+.product-image-and-actions {
+    flex: 1; /* Allows this section to grow */
+    min-width: 300px; /* Minimum width for this column */
+    max-width: 500px; /* Max width to prevent it from getting too wide */
+    display: flex; /* Make it a flex container */
+    flex-direction: column; /* Stack image and buttons vertically */
+    gap: 20px; /* Space between image section and buttons */
+    align-items: center; /* Center content within this column */
+}
+
+/* Product Image Section */
+.product-image-section {
+    width: 100%; /* Take full width of its parent (.product-image-and-actions) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.product-image-section img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 5px;
+}
+
+/* NEW: Container for Buttons under the image */
+.product-actions-bottom {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically by default */
+    width: 100%; /* Take full width of its parent */
+    gap: 15px; /* Space between buttons */
+    padding: 0 10px; /* Some horizontal padding to match image */
+}
+
+
+/* Product Info Section */
+.product-info-section {
+    flex: 2; /* Allows this section to take more space */
+    min-width: 350px;
+    padding-left: 20px; /* Keep padding for separation from image on large screens */
+    display: flex;
+    flex-direction: column;
+}
+
+.product-name {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+/* Style for the price section */
+.product-price-section {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.product-price-old {
+    font-size: 1.2em;
+    color: #999;
+    text-decoration: line-through;
+    white-space: nowrap;
+}
+
+.product-price-current {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+}
+
+.product-price-current.discount {
+    color: #1E90FF; /* Blue color for discounted price */
+}
+
+/* General Description */
+.product-general-description {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-left: 5px solid #1E90FF;
+    border-radius: 5px;
+}
+
+/* Product Specs Table Styles */
+.product-specs-table {
+    margin-top: 30px;
+    border-top: 1px solid #eee; /* Separator from description */
+    padding-top: 20px;
+}
+
+.product-specs-table h2 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.product-specs-table h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: #1E90FF;
+    border-radius: 2px;
+}
+
+.product-specs-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.product-specs-table td {
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 1em;
+    color: #444;
+}
+
+.product-specs-table tr:last-child td {
+    border-bottom: none;
+}
+
+.product-specs-table td:first-child {
+    font-weight: bold;
+    color: #333;
+    width: 35%;
+    padding-left: 10px;
+}
+
+.product-specs-table td:last-child {
+    text-align: right;
+    padding-right: 10px;
+    color: #666;
+}
+
+/* Buttons (Moved styles to new container) */
+.btn-add-to-cart {
+    background-color: #28a745; /* Green */
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Make button take full width of its new container */
+    text-align: center;
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.btn-add-to-cart:hover {
+    background-color: #218838;
+}
+
+.btn-add-to-cart.out-of-stock {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+.btn-add-to-cart.out-of-stock:hover {
+    background-color: #bbb;
+}
+
+
+.btn-back-to-shop {
+    background-color: #007bff; /* Blue */
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    width: 100%; /* Make button take full width of its new container */
+    text-align: center;
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.btn-back-to-shop:hover {
+    background-color: #0056b3;
+}
+
+
+/* Responsive Adjustments */
+@media (min-width: 992px) { /* Only apply side-by-side for large screens */
+    .product-actions-bottom {
+        flex-direction: row; /* Buttons side-by-side on large screens */
+        justify-content: center; /* Center buttons */
+        width: 100%; /* Ensures they stay within the image column's width */
+    }
+    .btn-add-to-cart,
+    .btn-back-to-shop {
+        width: calc(50% - 7.5px); /* Share width, considering gap */
+    }
+}
+
+
+@media (max-width: 991px) { /* Adjusted for smaller screens */
+    .product-detail-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        gap: 30px;
+    }
+
+    .product-image-and-actions { /* New wrapper also becomes full width */
+        min-width: unset;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .product-image-section { /* Image section itself can take full width */
+        width: 100%;
+    }
+
+    .product-info-section {
+        min-width: unset;
+        width: 100%;
+        padding-left: 0; /* No left padding when stacked */
+    }
+
+    .product-name {
+        font-size: 2em;
+        text-align: center;
+    }
+
+    .product-price-section {
+        justify-content: center;
+    }
+
+    .product-specs-table {
+        margin-top: 20px;
+    }
+
+    .product-specs-table h2 {
+        text-align: center;
+    }
+
+    .product-specs-table h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .product-specs-table td:first-child {
+        width: 40%;
+        padding-left: 5px;
+    }
+
+    .product-specs-table td:last-child {
+        padding-right: 5px;
+    }
+
+    /* Buttons will stack by default due to product-actions-bottom flex-direction: column */
+    .btn-add-to-cart,
+    .btn-back-to-shop {
+        width: 100%; /* Take full width of their container */
+        margin-right: 0; /* Remove old margin */
+        margin-bottom: 0; /* Ensure no extra margin if previously set */
+    }
+}
+
+@media (max-width: 600px) {
+    .product-detail-container {
+        margin: 30px auto;
+        padding: 15px;
+    }
+    .product-name {
+        font-size: 1.8em;
+    }
+    .product-price-current {
+        font-size: 1.5em;
+    }
+    .product-price-old {
+        font-size: 1em;
+    }
+    .product-general-description {
+        font-size: 1em;
+    }
+    .product-specs-table h2 {
+        font-size: 1.5em;
+    }
+    .product-specs-table td {
+        font-size: 0.9em;
+        padding: 10px 0;
+    }
+}

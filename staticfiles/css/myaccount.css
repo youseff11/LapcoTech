@@ -1,0 +1,384 @@
+/* myaccount_standalone.css - Updated with Blue Palette */
+
+.account-container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    direction: ltr;
+    text-align: left;
+}
+
+.account-title {
+    font-size: 3em;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.account-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: #1E90FF; /* Branding color: DodgerBlue */
+    border-radius: 2px;
+}
+
+.account-intro {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.account-grid {
+    display: grid;
+    grid-template-columns: 250px 1fr; /* Sidebar on left, content on right */
+    gap: 40px;
+}
+
+.account-sidebar {
+    background-color: #f9f9f9;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.account-nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.account-nav ul li {
+    margin-bottom: 10px;
+}
+
+.account-nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    color: #333;
+    text-decoration: none;
+    font-size: 1.1em;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.account-nav ul li a i {
+    margin-right: 10px;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.account-nav ul li a:hover,
+.account-nav ul li a.active {
+    background-color: #1E90FF; /* DodgerBlue */
+    color: white;
+}
+
+.account-nav ul li a:hover i,
+.account-nav ul li a.active i {
+    color: white;
+}
+
+.account-content {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.account-section {
+    display: none; /* Hidden by default */
+    animation: fadeIn 0.5s ease-out;
+}
+
+.account-section.active-section {
+    display: block; /* Show active section */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-heading {
+    font-size: 2.2em;
+    color: #34495e;
+    margin-top: 0;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+/* Form Styles */
+.account-form .form-group {
+    margin-bottom: 20px;
+}
+
+.account-form label {
+    display: block;
+    font-size: 1em;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.account-form input[type="text"],
+.account-form input[type="email"],
+.account-form input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+.account-form input[type="text"]:focus,
+.account-form input[type="email"]:focus,
+.account-form input[type="password"]:focus {
+    border-color: #1E90FF; /* Highlight on focus: DodgerBlue */
+    outline: none;
+    box-shadow: 0 0 5px rgba(30, 144, 255, 0.3); /* Adjust rgba for DodgerBlue */
+}
+
+.btn-update {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #1E90FF; /* DodgerBlue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-update:hover {
+    background-color: #4169E1; /* RoyalBlue */
+    transform: translateY(-2px);
+}
+
+/* Orders List Styles */
+.orders-list {
+    margin-top: 20px;
+}
+
+.order-item {
+    background-color: #fff;
+    border: 1px solid #eee;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.order-item h3 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.order-item p {
+    font-size: 0.95em;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.order-item .status-shipped {
+    color: #4682B4; /* SteelBlue for shipped status */
+    font-weight: bold;
+}
+
+.order-item .status-pending {
+    color: #ffc107; /* Orange for pending - kept as is */
+    font-weight: bold;
+}
+
+.btn-details {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 15px;
+    background-color: #007bff; /* Kept as is, a common blue */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.btn-details:hover {
+    background-color: #0056b3; /* Kept as is */
+}
+
+/* Addresses List Styles (or single address form) */
+.addresses-list {
+    margin-top: 20px;
+}
+
+.address-item {
+    background-color: #fff;
+    border: 1px solid #eee;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    position: relative; /* For edit/delete buttons */
+}
+
+.address-item h3 {
+    font-size: 1.3em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.address-item p {
+    font-size: 0.95em;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.btn-edit, .btn-delete {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+    margin-left: 10px; /* Space between buttons */
+}
+
+.btn-edit {
+    background-color: #ffc107; /* Kept as is (Orange) */
+    color: #333;
+}
+
+.btn-edit:hover {
+    background-color: #e0a800; /* Kept as is (Darker Orange) */
+}
+
+.btn-delete {
+    background-color: #dc3545; /* Kept as is (Red) */
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #c82333; /* Kept as is (Darker Red) */
+}
+
+.btn-add-address {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #1E90FF; /* DodgerBlue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-add-address:hover {
+    background-color: #4169E1; /* RoyalBlue */
+}
+
+/* Notification Settings */
+.notification-settings {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.notification-settings h3 {
+    font-size: 1.8em;
+    color: #34495e;
+    margin-bottom: 20px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2); /* Make checkbox slightly larger */
+}
+
+.checkbox-group label {
+    margin-bottom: 0; /* Override default label margin */
+    font-weight: normal;
+    color: #555;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .account-grid {
+        grid-template-columns: 1fr; /* Stack sidebar and content */
+    }
+    .account-sidebar {
+        padding: 20px;
+    }
+    .account-content {
+        padding: 25px;
+    }
+    .account-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    .account-nav ul li {
+        margin-bottom: 0;
+    }
+    .account-nav ul li a {
+        padding: 10px 12px;
+        font-size: 1em;
+        text-align: center;
+        flex-direction: column; /* Stack icon and text */
+    }
+    .account-nav ul li a i {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+    .section-heading {
+        font-size: 1.8em;
+    }
+}
+
+@media (max-width: 576px) {
+    .account-container {
+        margin: 20px auto;
+        padding: 15px;
+        max-width: 100%;
+    }
+    .account-title {
+        font-size: 2em;
+    }
+    .account-intro {
+        font-size: 0.95em;
+    }
+    .account-nav ul li a {
+        font-size: 0.9em;
+        padding: 8px 10px;
+    }
+    .btn-update, .btn-details, .btn-edit, .btn-delete, .btn-add-address {
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+}

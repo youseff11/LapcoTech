@@ -1,0 +1,130 @@
+.policies-container {
+    max-width: 900px;
+    margin: 50px auto; 
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    direction: ltr; 
+    text-align: left; 
+}
+
+.policies-title {
+    font-size: 3em;
+    color: #2c3e50;
+    text-align: center; 
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.policies-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: #1E90FF; 
+    border-radius: 2px;
+}
+
+.policies-intro {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 40px;
+    text-align: center; 
+}
+
+.policy-section {
+    margin-bottom: 50px;
+    padding: 25px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border-left: 5px solid #1E90FF;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+    font-size: 2em;
+    color: #34495e;
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.policy-content p {
+    font-size: 1.05em;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.policy-content ul {
+    list-style-type: none; 
+    padding-left: 20px; 
+    margin-top: 20px;
+}
+
+.policy-content ul li {
+    position: relative;
+    margin-bottom: 10px;
+    font-size: 1em;
+    color: #444;
+    line-height: 1.6;
+}
+
+.policy-content ul li::before {
+    content: '\2022'; 
+    color: #1E90FF; 
+    font-weight: bold;
+    display: inline-block;
+    width: 1em; 
+    margin-left: -1em; 
+    position: absolute;
+    left: 0; 
+}
+
+.policy-content ul li strong {
+    color: #333;
+}
+
+/* Responsive adjustments for policies content */
+@media (max-width: 768px) {
+    .policies-container {
+        margin: 30px auto;
+        padding: 20px;
+        max-width: 95%;
+    }
+    .policies-title {
+        font-size: 2.5em;
+    }
+    .section-title {
+        font-size: 1.8em;
+    }
+    .policies-intro,
+    .policy-content p,
+    .policy-content ul li {
+        font-size: 1em;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

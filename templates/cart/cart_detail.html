@@ -1,0 +1,58 @@
+{% load static %}
+{% include "parts/nav.html" %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/shop/shopp.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/cart/cart_detail.css' %}">
+
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+    <main class="cart-main-content">
+        <h1>Your Shopping Cart</h1>
+
+        {% if cart_items %}
+            <div class="cart-items-container">
+                {% for item in cart_items %}
+                    <div class="cart-item" data-item-id="{{ item.id }}">
+                        <div class="item-image">
+                            {% if item.product.image %}
+                                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                            {% else %}
+                                <img src="{% static 'images/placeholder.jpg' %}" alt="No Image">
+                            {% endif %}
+                        </div>
+                        <div class="item-details">
+                            <h3>{{ item.product.name }}</h3>
+                            <p>Price: <span class="item-price">{{ item.product.price|floatformat:0 }}</span> EGP</p>
+                            <div class="quantity-controls">
+                                <button class="quantity-minus" data-item-id="{{ item.id }}">-</button>
+                                <span class="item-quantity">{{ item.quantity }}</span>
+                                <button class="quantity-plus" data-item-id="{{ item.id }}">+</button>
+                            </div>
+                            <p>Total: <span class="item-total-price">{{ item.total_price|floatformat:0 }}</span> EGP</p>
+                            <button class="remove-item-btn" data-item-id="{{ item.id }}">
+                                <i class="fas fa-trash-alt"></i> Remove
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="cart-summary">
+                <h2>Cart Summary</h2>
+                <p>Total Items: <span id="summary-total-items">{{ cart_items_count }}</span></p>
+                <p class="total-price"> Total: <span id="summary-grand-total">{{ total_cart_price|floatformat:0 }}</span> EGP</p>
+                <button class="btn-checkout">Proceed to Checkout</button>
+            </div>
+        {% else %}
+            <p class="empty-cart-message">Your cart is empty. <a href="{% url 'shop:product_list' %}">Start shopping!</a></p>
+        {% endif %}
+
+        <a href="{% url 'shop:product_list' %}" class="btn-continue-shopping">Continue Shopping</a>
+    </main>
+{% endblock content %}
+
+{% include "parts/footer.html" %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static "js/cart_detail.js" %}"></script>

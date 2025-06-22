@@ -1,0 +1,187 @@
+{% load static %}
+{% include "parts/nav.html" %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="{% static 'css/myaccount.css' %}">
+    
+</head>
+<body>
+    <main class="account-container">
+        <h1 class="account-title">My Account</h1>
+        <p class="account-intro">
+            Welcome to your personal dashboard. Manage your orders and update your profile.
+        </p>
+
+        <div class="account-grid">
+            <aside class="account-sidebar">
+                <nav class="account-nav">
+                    <ul>
+                        <li><a href="#profile" class="active"><i class="fas fa-user"></i> Profile</a></li>
+                        <li><a href="#orders"><i class="fas fa-box-open"></i> My Orders</a></li>
+                        <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <div class="account-content">
+                <section id="profile" class="account-section active-section">
+                    <h2 class="section-heading">My Profile</h2>
+                    
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    <form class="account-form" action="{% url 'myaccount:account' %}" method="POST"> {# <-- تم التعديل هنا #}
+                        {% csrf_token %} {# VERY IMPORTANT for POST requests #}
+
+                        {# Display non-field errors (if any) #}
+                        {% if form.non_field_errors %}
+                            <ul class="errorlist">
+                                {% for error in form.non_field_errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+
+                        <div class="form-group">
+                            <label for="{{ form.username.id_for_label }}">Username:</label>
+                            {# Using form.username to render the field properly, including ID, name, and value #}
+                            {{ form.username }}
+                            {# Display field-specific errors #}
+                            {% if form.username.errors %}
+                                <ul class="errorlist">
+                                    {% for error in form.username.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.first_name.id_for_label }}">First Name:</label>
+                            {{ form.first_name }}
+                            {% if form.first_name.errors %}
+                                <ul class="errorlist">
+                                    {% for error in form.first_name.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.last_name.id_for_label }}">Last Name:</label>
+                            {{ form.last_name }}
+                            {% if form.last_name.errors %}
+                                <ul class="errorlist">
+                                    {% for error in form.last_name.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.email.id_for_label }}">Email Address:</label>
+                            {{ form.email }} {# This field is readonly as per your forms.py #}
+                            {% if form.email.errors %}
+                                <ul class="errorlist">
+                                    {% for error in form.email.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.phone_number.id_for_label }}">Phone Number:</label>
+                            {{ form.phone_number }}
+                            {% if form.phone_number.errors %}
+                                <ul class="errorlist">
+                                    {% for error in form.phone_number.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+
+                        <button type="submit" class="btn-update">Update Profile</button>
+                    </form>
+                </section>
+
+                <section id="orders" class="account-section">
+                    <h2 class="section-heading">My Orders</h2>
+                    <div class="orders-list">
+                        {% if orders %} 
+                            {% for order in orders %}
+                                <div class="order-item">
+                                    <h3>Order #{{ order.id }}</h3>
+                                    <p>Date: {{ order.created_at|date:"Y-m-d H:i" }}</p> {# <-- Changed from date_ordered to created_at #}
+                                    <p>Status:
+                                        <span class="status-badge status-{{ order.status|lower }}"> {# <-- Added |lower for CSS class #}
+                                            {{ order.get_status_display }}
+                                        </span>
+                                    </p>
+                                    <p>Total: {{ order.total_price|floatformat:0 }} EGP</p> {# <-- Added currency and floatformat #}
+                                    <a href="{% url 'cart:order_success' order.id %}" class="btn-details">View Details</a> {# <-- تم التعديل هنا #}
+                                </div>
+                            {% empty %} 
+                                <p>You haven't placed any orders yet.</p>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.account-nav ul li a');
+            const sections = document.querySelectorAll('.account-section');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault(); 
+                    navLinks.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                    sections.forEach(section => section.classList.remove('active-section')); 
+                    const targetId = this.getAttribute('href').substring(1); // Remove '#'
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) { // تأكد من أن القسم المستهدف موجود
+                        targetSection.classList.add('active-section');
+                    }
+
+                    window.history.pushState(null, '', this.getAttribute('href'));
+                });
+            });
+
+            const initialHash = window.location.hash || '#profile';
+            const initialNavLink = document.querySelector(`.account-nav ul li a[href="${initialHash}"]`);
+            if (initialNavLink) {
+                initialNavLink.click();
+            } else {
+                const defaultProfileLink = document.querySelector('.account-nav ul li a[href="#profile"]');
+                if (defaultProfileLink) {
+                    defaultProfileLink.click();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+{% include "parts/footer.html" %}

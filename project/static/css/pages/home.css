@@ -1,0 +1,364 @@
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1050;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 90vh;
+    max-height: 900px;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    margin-top: 0;
+    overflow: hidden;
+}
+
+.hero .container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: -1;
+}
+
+.hero-content {
+    position: relative;
+    max-width: 800px;
+    padding: 0 20px;
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 2.5rem;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    line-height: 1.6;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 15px 40px;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover {
+    background-color: #1a252f;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        height: 70vh;
+        min-height: 500px;
+    }
+    
+    .hero .container {
+        padding: 0;
+    }
+
+    .hero-content {
+        padding: 0 15px;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero p {
+        font-size: 1.2rem;
+    }
+    
+    .btn-primary {
+        padding: 12px 30px;
+    }
+}
+
+/* Features Section */
+.features {
+    padding: 60px 0;
+    background-color: white;
+}
+
+.features .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.feature-box {
+    text-align: center;
+    padding: 30px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+.feature-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.feature-box i {
+    font-size: 40px;
+    color: black;
+    margin-bottom: 20px;
+}
+
+.feature-box h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+/* Simple Design Styles (Not used in the provided HTML, but kept for completeness if needed) */
+.featured-products {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 36px;
+    color: #333;
+    position: relative;
+    font-weight: 700;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.product-card-simple {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.product-image-wrapper {
+    position: relative;
+    aspect-ratio: 1/1; /* Makes the image square */
+    overflow: hidden;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card-simple:hover .product-image {
+    transform: scale(1.05);
+}
+
+.product-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px; 
+    background-color: #4a6bff;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.product-badge.sale {
+    background-color: #ff4757;
+}
+
+.product-title-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0; 
+    right: 0; 
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    color: white;
+    padding: 20px 15px 10px;
+    font-size: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.product-card-simple:hover .product-title-overlay {
+    padding-bottom: 15px;
+}
+
+/* Responsive media queries */
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    
+    .section-title {
+        display: none; /* Hidden on small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Styling for Daily Offers Section */
+.daily-offers-section .container .box {
+    display: flex;
+    flex-direction: column; /* يرتب العناصر فوق بعضها */
+    align-items: center; /* يوسط العناصر أفقياً */
+    justify-content: center; /* يوسط العناصر رأسياً إذا كان هناك ارتفاع محدد */
+    text-align: center; /* لتوسيط النص داخل العناصر */
+    width: 100%; /* تأكد أنه يأخذ عرض الكونتينر بالكامل */
+}
+
+/* ممكن تحتاج لتعديل هامش العنوان لجعله يبدو في المنتصف تماما */
+.daily-offers-section .section-title {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content; /* أو يمكنك إزالة هذا السطر إذا كان text-align: center كافياً */
+}
+
+/* لتوسيط النص "No daily offers available at the moment." */
+.daily-offers-section p {
+    text-align: center;
+    width: 100%; /* تأكد أنه يأخذ عرض الكونتينر ليعمل التوسيط */
+}
+
+/* إذا كان هناك محتوى آخر داخل daily-offers-container وتريد توسيطه هو أيضاً */
+.daily-offers-container {
+    display: flex;
+    justify-content: center; /* يوسط الكروت أفقياً */
+    align-items: center; /* يوسط رأسياً إذا كانت هناك حاجة لذلك */
+    flex-wrap: wrap; /* يسمح للكروت بالنزول لسطر جديد */
+    width: 100%; /* مهم لضمان التوسيط */
+}
+/* تصميم كروت Daily Offers */
+.product-card-daily-offer {
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 280px;
+    margin: 15px;
+    color: black;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.product-card-daily-offer:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 0 25px rgba(0, 170, 255, 0.5);
+}
+
+/* صورة المنتج داخل الكرت */
+.product-image-daily-offer {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* معلومات المنتج */
+.product-info-daily-offer {
+    padding: 15px;
+    text-align: left;
+}
+
+.product-title-daily-offer {
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: black;
+}
+
+.product-description-daily-offer {
+    font-size: 14px;
+    color: black;
+    margin-bottom: 10px;
+    min-height: 40px;
+}
+
+/* السعر */
+.product-price-daily-offer {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+}
+
+.product-price-daily-offer .old-price {
+    text-decoration: line-through;
+    color: #ff8080;
+    font-size: 14px;
+}
+
+.product-price-daily-offer .current-price {
+    color: #00ffcc;
+    font-weight: bold;
+    font-size: 16px;
+}

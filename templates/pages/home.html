@@ -1,0 +1,137 @@
+{% load static %}
+{% include "parts/nav.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static "css/pages/home.css" %}">
+<link rel="stylesheet" href="{% static "css/pages/categ.css" %}">
+<link rel="stylesheet" href="{% static "css/pages/Future-Products.css" %}"> {# ممكن تحتاج تضيف CSS جديد هنا لو مش موجود #}
+<div class="overlay" id="overlay"></div>
+
+<section class="hero">
+    <div class="container">
+        <img src="{% static "images/1.png" %}" alt="Lapco Products" class="hero-image">
+        <div class="hero-content">
+            <h1>Welcome to Lapco</h1>
+            <p>Discover our unique product collection and exclusive offers</p>
+            <a href="{% url 'shop:product_list' %}" class="btn btn-primary">Shop Now</a> 
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <div class="feature-box">
+            <i class="fas fa-truck"></i>
+            <h3>Fast Shipping</h3>
+            <p>Delivery within 24-48 hours</p>
+        </div>
+        <div class="feature-box">
+            <i class="fas fa-undo"></i>
+            <h3>Easy Returns</h3>
+            <p>14-day return policy</p>
+        </div>
+        <div class="feature-box">
+            <i class="fas fa-lock"></i>
+            <h3>Secure Payment</h3>
+            <p>Multiple secure payment methods</p>
+        </div>
+        <div class="feature-box">
+            <i class="fas fa-headset"></i>
+            <h3>Technical Support</h3>
+            <p>24/7 support available</p>
+        </div>
+    </div>
+</section>
+
+<section class="daily-offers-section"> {# غيرت اسم السكشن ليكون أوضح #}
+    <div class="container">
+        <div class="box">
+            <div class="section-title">
+                <h4>Daily Offers</h4>
+            </div>
+            
+            <div class="daily-offers-container"> {# ده الكونتينر اللي هيتحط فيه الكروت #}
+                {% if daily_offers %}
+                    {% for offer in daily_offers %}
+                    <a href="{% if offer.link_url %}{{ offer.link_url }}{% else %}#{% endif %}" class="product-card-link">
+                        <div class="product-card-daily-offer"> {# كارد جديدة بتصميم الصورة #}
+                            {% if offer.image %}
+                                <img src="{{ offer.image.url }}" alt="{{ offer.title }}" class="product-image-daily-offer">
+                            {% else %}
+                                <img src="{% static 'images/placeholder.png' %}" alt="No Image" class="product-image-daily-offer"> {# صورة افتراضية لو مفيش صورة للعرض #}
+                            {% endif %}
+                            <div class="product-info-daily-offer">
+                                <h3 class="product-title-daily-offer">{{ offer.title }}</h3>
+                                <p class="product-description-daily-offer">
+                                    {{ offer.subtitle|truncatechars:70 }} {# وصف مختصر #}
+                                </p>
+                                <div class="product-price-daily-offer">
+                                    {% if offer.has_discount %}
+                                        <span class="old-price">{{ offer.old_price|floatformat:0 }} EGP</span>
+                                        <span class="current-price">{{ offer.current_price|floatformat:0 }} EGP</span>
+                                    {% else %}
+                                        <span class="current-price">{{ offer.current_price|floatformat:0 }} EGP</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                {% else %}
+                    <p>No daily offers available at the moment.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{# هنا باقي الأقسام زي Categories Section #}
+<section class="categories-section">
+    <h2 class="section-title">Explore Categories</h2>
+    <div class="category-cards-container">
+        <a href="{% url 'shop:product_list_by_category' category_slug='gaming-laptops' %}" class="category-card-link">
+            <div class="category-card" style="background-image: url('{% static "images/gamingx.png" %}');">
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <h3 class="category-title">GAMING LAPTOPS</h3>
+                    <p class="category-subtitle">HIGH PERFORMANCE</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="{% url 'shop:product_list_by_category' category_slug='workstations' %}" class="category-card-link">
+            <div class="category-card" style="background-image: url('{% static "images/work.png" %}');">
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <h3 class="category-title">MOBILE WORKSTATIONS</h3>
+                    <p class="category-subtitle">POWERFUL COLLECTION</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="{% url 'shop:product_list_by_category' category_slug='2-in-1-laptops' %}" class="category-card-link">
+            <div class="category-card" style="background-image: url('{% static "images/2in1.png" %}');">
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <h3 class="category-title">2-IN-1 LAPTOPS</h3>
+                    <p class="category-subtitle">PORTABLE & SLEEK</p>
+                </div>
+            </div>
+        </a>
+
+        <a href="{% url 'shop:product_list_by_category' category_slug='business-and-school' %}" class="category-card-link">
+            <div class="category-card" style="background-image: url('{% static "images/bui.png" %}');">
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <h3 class="category-title">BUSINESS & SCHOOL</h3>
+                    <p class="category-subtitle">LARGE COLLECTION</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</section>
+
+{% endblock content %}
+
+{% include "parts/footer.html" %}

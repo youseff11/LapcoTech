@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Emerald</title>
+    <link rel="stylesheet" href="{% static 'css/nav/nav.css' %}" />
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container">
+        <div class="nav-left">
+            <a href="{% url 'home' %}" class="nav-item">Home</a>
+            <div class="dropdown">
+                <a href="{% url 'shop:product_list' %}" class="nav-item dropbtn">Shop ▼</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'shop:product_list_by_category' category_slug='gaming-laptops' %}">Gaming Laptops</a>
+                    <a href="{% url 'shop:product_list_by_category' category_slug='workstations' %}">Workstations</a>
+                    <a href="{% url 'shop:product_list_by_category' category_slug='2-in-1-laptops' %}">2-in-1 Laptops</a>
+                    <a href="{% url 'shop:product_list_by_category' category_slug='business-and-school' %}">Business & School</a>
+                </div>
+            </div>
+            <a href="{% url 'policies' %}" class="nav-item">Our Policies</a>
+            <a href="{% url 'contact:contact' %}" class="nav-item">Contact Us</a>
+            <a href="{% url 'myaccount:account' %}" class="nav-item">My account</a>
+        </div>
+        <div class="logo">
+            <img src="{% static 'images/logo.jpg' %}" alt="Emerald Logo" />
+        </div>
+        <div class="nav-right">
+            <div class="user-menu-container">
+                <a href="#" class="nav-icon user-icon-trigger">
+                    <img src="https://img.icons8.com/material-outlined/24/19422f/user-male-circle.png" alt="User" />
+                </a>
+                <div class="user-dropdown-menu">
+                    {% if user.is_authenticated %}
+                        <span class="dropdown-item">Hello, {{ user.username }}!</span>
+                        <form action="{% url 'logout' %}" method="post" style="display: none;" id="logout-form">
+                            {% csrf_token %}
+                        </form>
+                        <a href="#" class="dropdown-item" onclick="document.getElementById('logout-form').submit(); return false;">Logout</a>
+                    {% else %}
+                        <span class="dropdown-item">Hello, Guest!</span>
+                        <a href="{% url 'login' %}" class="dropdown-item">Login</a>
+                        <a href="{% url 'signup' %}" class="dropdown-item">Sign Up</a>
+                    {% endif %}
+                </div>
+            </div>
+
+            {# The cart-icon-wrapper now holds the initial cart count as a data attribute #}
+            <a href="{% url 'cart:cart_detail' %}" class="cart-icon-wrapper" id="openCartBtn" data-initial-cart-count="{% if cart_items_count is not None %}{{ cart_items_count }}{% else %}0{% endif %}">
+                <img src="https://img.icons8.com/material-outlined/24/19422f/shopping-bag--v1.png" alt="Shopping Bag" class="nav-icon" />
+                <span id="cart-count" class="cart-count-badge">{% if cart_items_count is not None %}{{ cart_items_count }}{% else %}0{% endif %}</span>
+            </a>
+        </div>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+    </div>
+</nav>
+
+<div class="nav-menu-mobile" id="mobileMenu">
+    <div class="mobile-menu-header">
+        <button class="close-btn" id="closeMenu" aria-label="Close menu">×</button>
+    </div>
+    <a href="{% url 'home' %}" class="mobile-nav-item">Home</a>
+
+    <div class="mobile-dropdown">
+        <a href="{% url 'shop:product_list' %}" class="mobile-nav-item mobile-dropbtn">Shop +</a>
+        <div class="mobile-dropdown-content">
+            <a href="{% url 'shop:product_list_by_category' category_slug='gaming-laptops' %}">Gaming Laptops</a>
+            <a href="{% url 'shop:product_list_by_category' category_slug='workstations' %}">Workstations</a>
+            <a href="{% url 'shop:product_list_by_category' category_slug='2-in-1-laptops' %}">2-in-1 Laptops</a>
+            <a href="{% url 'shop:product_list_by_category' category_slug='business-and-school' %}">Business & School</a>
+        </div>
+    </div>
+
+    <a href="{% url 'policies' %}" class="mobile-nav-item">Our Policies</a>
+    <a href="{% url 'contact:contact' %}" class="mobile-nav-item">Contact Us</a>
+    <a href="{% url 'myaccount:account' %}" class="mobile-nav-item">My account</a>
+</div>
+
+
+{% block content %}{% endblock %}
+
+<script src="{% static "js/navv.js" %}"></script>
+
+</body>
+</html>

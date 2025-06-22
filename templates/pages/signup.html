@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    {% load static %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/pages/login.css' %}">
+    <style>
+        /* This style block can be removed if moved to login.css */
+        @media (max-width: 991px) {
+           .login_form_container {
+             width: 90%;
+           }
+        }
+        /* The .errorlist and .input_group label styles are now handled in login.css */
+    </style>
+</head>
+<body>
+    <div class="login_form_container">
+        <div class="login_form">
+            <h2>SignUp</h2>
+
+            {% if messages %}
+                <ul class="messages" style="list-style-type: none; padding: 0; margin-bottom: 10px;">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}
+                            style="padding: 10px; margin-bottom: 5px; border-radius: 5px;
+                                         {% if 'success' in message.tags %}background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;{% endif %}
+                                         {% if 'error' in message.tags %}background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;{% endif %}
+                                         {% if 'info' in message.tags %}background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb;{% endif %}
+                                         ">
+                            {{ message }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form action="{% url 'signup' %}" method="POST">
+                {% csrf_token %}
+
+                {# Consolidated Error Display at the Top #}
+                {% if form.errors %}
+                    <ul class="errorlist top-level-errorlist"> {# Added a new class for specific styling #}
+                        {% for field, errors in form.errors.items %}
+                            {% if field == '__all__' %}
+                                {# Handle non-field errors #}
+                                {% for error in errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            {% else %}
+                                {# Handle field-specific errors #}
+                                {% for error in errors %}
+                                    <li><strong>{{ field|capfirst }}:</strong> {{ error }}</li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+
+                {# Username Field #}
+                <div class="input_group">
+                    <i class="fa fa-user"></i>
+                    <input
+                        type="text"
+                        name="{{ form.username.name }}"
+                        placeholder="Enter Username"
+                        class="input_text"
+                        autocomplete="off"
+                        required
+                        value="{{ form.username.value|default:'' }}"
+                    />
+                </div>
+
+                {# Email Field #}
+                <div class="input_group">
+                    <i class="fa fa-envelope"></i>
+                    <input
+                        type="email"
+                        name="{{ form.email.name }}"
+                        placeholder="Enter Email"
+                        class="input_text"
+                        autocomplete="off"
+                        required
+                        value="{{ form.email.value|default:'' }}"
+                    />
+                </div>
+
+                {# Phone Number Field (NEW) #}
+                <div class="input_group">
+                    <i class="fa fa-phone"></i> {# Phone icon #}
+                    <input
+                        type="tel" {# Use type="tel" for phone numbers, it helps with mobile keyboards #}
+                        name="{{ form.phone_number.name }}"
+                        placeholder="Enter Phone Number"
+                        class="input_text"
+                        autocomplete="tel" {# Autocomplete hint for phone #}
+                        {% if form.phone_number.field.required %}required{% endif %} {# Make required based on form field setting #}
+                        value="{{ form.phone_number.value|default:'' }}"
+                    />
+                </div>
+
+                {# Password1 Field #}
+                <div class="input_group">
+                    <i class="fa fa-lock"></i>
+                    <input
+                        type="password"
+                        name="{{ form.password1.name }}"
+                        placeholder="Enter Password"
+                        class="input_text"
+                        autocomplete="new-password" {# Hint for new password #}
+                        required
+                    />
+                </div>
+
+                {# Password2 Field (للتأكيد) #}
+                <div class="input_group">
+                    <i class="fa fa-lock"></i>
+                    <input
+                        type="password"
+                        name="{{ form.password2.name }}"
+                        placeholder="Confirm Password"
+                        class="input_text"
+                        autocomplete="new-password" {# Hint for new password #}
+                        required
+                    />
+                </div>
+
+                <button type="submit" class="footer">SignUp</button>
+            </form>
+            <div class="footer-txt">
+                <p>Already have an account?</p>
+                <a href="{% url 'login' %}">Log In</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

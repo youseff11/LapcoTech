@@ -1,0 +1,44 @@
+    {% extends 'base.html' %}
+    {% load static %}
+
+    {% block title %}Checkout - Emerald{% endblock %}
+
+    {% block content %}
+    <link rel="stylesheet" href="{% static 'css/cart/checkout.css' %}"> 
+
+    <div class="checkout-container">
+        <h1>Checkout Details</h1>
+
+        <div class="checkout-summary">
+            <h2>Order Summary</h2>
+            {% if cart_items %} 
+                <ul>
+                    {% for item in cart_items %} 
+                        <li>{{ item.product.name }} ({{ item.quantity }} x {{ item.product.price|floatformat:0 }} EGP)</li>
+                    {% endfor %} 
+                </ul>
+                <p><strong>Total: <span id="checkoutGrandTotal">{{ total_cart_price|floatformat:0 }}</span> EGP</strong></p>
+            {% else %}
+                <p>Your shopping cart is empty.</p>
+            {% endif %}
+        </div>
+
+        <div class="shipping-form">
+            <h2>Shipping Information</h2>
+            {# النموذج سيتم إرساله عبر AJAX، لذا لا تحتاج إلى method="post" هنا #}
+            <form id="shippingForm"> {# <--- إضافة ID للوصول إليه في JS #}
+                {% csrf_token %}
+                {{ form.as_p }} {# <--- هنا سيتم عرض حقول النموذج #}
+                {# هذا الزر سيقوم بتشغيل دالة JavaScript #}
+                <button type="submit" class="btn place-order-btn">Place Order</button>
+            </form>
+        </div>
+    </div>
+
+<script id="cart-data" type="application/json">
+    {{ cart_data_json|safe }} 
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'js/checkout.js' %}"></script>
+
+    {% endblock content %}
