@@ -265,3 +265,100 @@
         grid-template-columns: 1fr;
     }
 }
+
+
+/* Styling for Daily Offers Section */
+.daily-offers-section .container .box {
+    display: flex;
+    flex-direction: column; /* يرتب العناصر فوق بعضها */
+    align-items: center; /* يوسط العناصر أفقياً */
+    justify-content: center; /* يوسط العناصر رأسياً إذا كان هناك ارتفاع محدد */
+    text-align: center; /* لتوسيط النص داخل العناصر */
+    width: 100%; /* تأكد أنه يأخذ عرض الكونتينر بالكامل */
+}
+
+/* ممكن تحتاج لتعديل هامش العنوان لجعله يبدو في المنتصف تماما */
+.daily-offers-section .section-title {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content; /* أو يمكنك إزالة هذا السطر إذا كان text-align: center كافياً */
+}
+
+/* لتوسيط النص "No daily offers available at the moment." */
+.daily-offers-section p {
+    text-align: center;
+    width: 100%; /* تأكد أنه يأخذ عرض الكونتينر ليعمل التوسيط */
+}
+
+/* إذا كان هناك محتوى آخر داخل daily-offers-container وتريد توسيطه هو أيضاً */
+.daily-offers-container {
+    display: flex;
+    justify-content: center; /* يوسط الكروت أفقياً */
+    align-items: center; /* يوسط رأسياً إذا كانت هناك حاجة لذلك */
+    flex-wrap: wrap; /* يسمح للكروت بالنزول لسطر جديد */
+    width: 100%; /* مهم لضمان التوسيط */
+}
+/* تصميم كروت Daily Offers */
+.product-card-daily-offer {
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 280px;
+    margin: 15px;
+    color: black;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.product-card-daily-offer:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 0 25px rgba(0, 170, 255, 0.5);
+}
+
+/* صورة المنتج داخل الكرت */
+.product-image-daily-offer {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* معلومات المنتج */
+.product-info-daily-offer {
+    padding: 15px;
+    text-align: left;
+}
+
+.product-title-daily-offer {
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: black;
+}
+
+.product-description-daily-offer {
+    font-size: 14px;
+    color: black;
+    margin-bottom: 10px;
+    min-height: 40px;
+}
+
+/* السعر */
+.product-price-daily-offer {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+}
+
+.product-price-daily-offer .old-price {
+    text-decoration: line-through;
+    color: #ff8080;
+    font-size: 14px;
+}
+
+.product-price-daily-offer .current-price {
+    color: #00ffcc;
+    font-weight: bold;
+    font-size: 16px;
+}

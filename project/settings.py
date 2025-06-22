@@ -6,9 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'XHnKHrNbN2g2Cp71mit7CjDgOoGDSluYyOT9rFm-0JMk2NEXvgo2B8jk4qGQMSzJ67s'
 
-# **هام: اجعل DEBUG = True مؤقتاً أثناء التطوير لسهولة التصحيح**
-# DEBUG = False
-DEBUG = True # <-- اعدها True للتطوير
+DEBUG = True 
 
 ALLOWED_HOSTS = ['*']
 
