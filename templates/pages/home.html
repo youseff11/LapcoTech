@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" href="{% static "css/pages/home.css" %}">
 <link rel="stylesheet" href="{% static "css/pages/categ.css" %}">
-<link rel="stylesheet" href="{% static "css/pages/Future-Products.css" %}"> {# ممكن تحتاج تضيف CSS جديد هنا لو مش موجود #}
+<link rel="stylesheet" href="{% static "css/pages/Future-Products.css" %}"> 
 <div class="overlay" id="overlay"></div>
 
 <section class="hero">
@@ -44,18 +44,18 @@
     </div>
 </section>
 
-<section class="daily-offers-section"> {# غيرت اسم السكشن ليكون أوضح #}
+<section class="daily-offers-section"> 
     <div class="container">
         <div class="box">
             <div class="section-title">
                 <h4>Daily Offers</h4>
             </div>
             
-            <div class="daily-offers-container"> {# ده الكونتينر اللي هيتحط فيه الكروت #}
+            <div class="daily-offers-container"> 
                 {% if daily_offers %}
                     {% for offer in daily_offers %}
                     <a href="{% if offer.link_url %}{{ offer.link_url }}{% else %}#{% endif %}" class="product-card-link">
-                        <div class="product-card-daily-offer"> {# كارد جديدة بتصميم الصورة #}
+                        <div class="product-card-daily-offer">
                             {% if offer.image %}
                                 <img src="{{ offer.image.url }}" alt="{{ offer.title }}" class="product-image-daily-offer">
                             {% else %}
@@ -64,7 +64,7 @@
                             <div class="product-info-daily-offer">
                                 <h3 class="product-title-daily-offer">{{ offer.title }}</h3>
                                 <p class="product-description-daily-offer">
-                                    {{ offer.subtitle|truncatechars:70 }} {# وصف مختصر #}
+                                    {{ offer.subtitle|truncatechars:70 }} 
                                 </p>
                                 <div class="product-price-daily-offer">
                                     {% if offer.has_discount %}
@@ -86,7 +86,6 @@
     </div>
 </section>
 
-{# هنا باقي الأقسام زي Categories Section #}
 <section class="categories-section">
     <h2 class="section-title">Explore Categories</h2>
     <div class="category-cards-container">

@@ -1,14 +1,16 @@
 # C:\Users\magdy\OneDrive\Desktop\lapco\lapco-tech\project\cart\admin.py
 from django.contrib import admin
-from django.utils.html import format_html # **تأكد من استيرادها هنا**
+from django.utils.html import format_html
 
 from .models import Cart, CartItem, ShippingAddress, Order, OrderItem # استيراد النماذج من models.py
 
 @admin.register(ShippingAddress)
 class ShippingAddressAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'first_name', 'last_name', 'email', 'phone_number', 'city', 'address', 'created_at')
-    list_filter = ('created_at', 'city', 'user')
-    search_fields = ('first_name', 'last_name', 'email', 'phone_number', 'address', 'city')
+    # تم إضافة 'faculty' و 'year' إلى list_display
+    list_display = ('id', 'user', 'first_name', 'last_name', 'email', 'phone_number', 'city', 'address', 'faculty', 'year', 'created_at')
+    # تم إضافة 'faculty' و 'year' إلى list_filter و search_fields
+    list_filter = ('created_at', 'city', 'user', 'faculty', 'year')
+    search_fields = ('first_name', 'last_name', 'email', 'phone_number', 'address', 'city', 'faculty', 'year')
     readonly_fields = ('created_at', 'updated_at',)
 
     def get_readonly_fields(self, request, obj=None):
