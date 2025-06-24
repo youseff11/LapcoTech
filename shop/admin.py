@@ -19,13 +19,13 @@ class BrandAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'sku', 'category', 'brand', 'price', 'old_price', 'is_available', 'created_at'] # <--- إضافة 'sku' هنا
+    list_display = ['name', 'sku', 'category', 'brand', 'price', 'old_price', 'is_available', 'created_at']
     list_filter = ['is_available', 'created_at', 'category', 'brand', 'condition', 'form_factor']
-    search_fields = ['name', 'description', 'cpu', 'gpu', 'ram', 'storage', 'model_name', 'sku'] # <--- إضافة 'sku' هنا
+    search_fields = ['name', 'description', 'cpu', 'gpu', 'ram', 'storage', 'model_name', 'sku']
     
     fieldsets = (
         (None, {
-            'fields': ('name', 'sku', 'category', 'brand', 'image', 'is_available') # <--- إضافة 'sku' هنا
+            'fields': ('name', 'sku', 'category', 'brand', 'image', 'is_available')
         }),
         ('Pricing', {
             'fields': ('price', 'old_price')

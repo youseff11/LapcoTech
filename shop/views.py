@@ -36,7 +36,7 @@ def product_list(request, category_slug=None, brand_slug=None):
             Q(ram__icontains=query) |
             Q(storage__icontains=query) |
             Q(model_name__icontains=query) |
-            Q(sku__icontains=query)  # <--- إضافة البحث بـ SKU
+            Q(sku__icontains=query)  # <--- هذا هو التعديل المهم هنا
         ).distinct() 
         if page_title == "All Laptops": 
             page_title = f"Search results for '{query}'"
