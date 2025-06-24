@@ -49,7 +49,7 @@ class Product(models.Model):
         ('USED', 'Used'),
         ('REFURBISHED', 'Refurbished'),
         ('OPEN_BOX', 'Open Box'),
-        ('DAMAGED', 'Damaged'),
+        ('ESTERAD', 'استيراد'), # <--- تم إضافة "ESTERAD" هنا
     ]
     condition = models.CharField(
         max_length=50,
