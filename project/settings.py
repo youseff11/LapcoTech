@@ -1,26 +1,14 @@
 from pathlib import Path
 import os
-import environ 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+SECRET_KEY = 'XHnKHrNbN2g2Cp71mit7CjDgOoGDSluYyOT9rFm-0JMk2NEXvgo2B8jk4qGQMSzJ67s'
 
-env = environ.Env(
-    DEBUG=(bool, False),
-    SECRET_KEY=(str, ''), 
-)
+DEBUG = True 
 
-
-
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
-
-
-SECRET_KEY = env('SECRET_KEY') 
-
-DEBUG = env('DEBUG') 
-
-ALLOWED_HOSTS = ['*'] 
+ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
@@ -40,7 +28,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', 
+    'whitenoise.middleware.WhiteNoiseMiddleware', # <-- تأكد أنها هنا (عادة بعد SecurityMiddleware)
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -71,9 +59,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'project.wsgi.application'
 
 
-# إعدادات قاعدة البيانات - ستُقرأ من DATABASE_URL
 DATABASES = {
-    'default': env.db(), # <--- هذا السطر سيقرأ DATABASE_URL
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
@@ -100,16 +90,19 @@ USE_I18N = True
 
 USE_TZ = True
 
+# **إعدادات الملفات الثابتة (Static Files)**
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # المجلد الذي يتم تجميع الملفات الثابتة فيه
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'project/static'), 
+    os.path.join(BASE_DIR, 'project/static'), # مجلد static داخل مشروعك
+    # يمكنك إضافة مجلدات static لأي تطبيقات أخرى هنا إذا كانت خارج هيكلها الافتراضي
 ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
+# **إعدادات ملفات الوسائط (Media Files) - الصور المرفوعة من المستخدمين**
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles') 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles') # المجلد الذي يتم فيه تخزين ملفات الوسائط
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
